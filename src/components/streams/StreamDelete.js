@@ -2,7 +2,7 @@ import React from 'react';
 import { deleteStream, fetchStream } from '../../actions/index';
 import { connect } from 'react-redux';
 import Modal from '../Modal';
-import history from '../history';
+import history from '../../history';
 
 
 class StreamDelete extends React.Component {
@@ -31,10 +31,12 @@ class StreamDelete extends React.Component {
     }
 
     renderActions = () => {
-        <React.Fragment>
-            <button onClick={this.props.onDelete} className="ui red button">DELETE</button>
-            <button onClick={() => history.push('/')} className="ui button">CANCEL</button>
-        </React.Fragment>
+        return (
+            <React.Fragment>
+                <button onClick={this.onDelete} className="ui red button">DELETE</button>
+                <button onClick={() => history.push('/')} className="ui button">CANCEL</button>
+            </React.Fragment>
+        );
     }
 
     render() {
@@ -43,7 +45,7 @@ class StreamDelete extends React.Component {
                 Delete Stream
                 <Modal 
                     title="this is title"
-                    content={this.renderContent}
+                    content={this.renderContent()}
                     actions={this.renderActions()}
                     onDismiss={() => history.push('/')}
                 />

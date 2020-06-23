@@ -27,7 +27,9 @@ class StreamList extends React.Component {
                     {this.renderAdmin(stream)}
                     <i className="large play circle outline middle aligned icon"></i>
                     <div className="content">
-                        <div className="header">{stream.title}</div>
+                        <Link to={`/streams/${stream.id}`}>
+                            <div className="header">{stream.title}</div>
+                        </Link>
                         {stream.description}
                     </div>
                 </div>
