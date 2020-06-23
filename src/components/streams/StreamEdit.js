@@ -7,7 +7,8 @@ import StreamForm from './StreamForm';
 
 class StreamEdit extends React.Component {
     componentDidMount() {
-        this.props.fetchStream(this.props.match.params.id);
+        this.props.fetchStream(this.props.match.params.id); 
+        // 특정 id의 스트림을 http request로 불러와 streams state에 넣어둔다.
     }
 
     onSubmit = (formValues) => {
@@ -15,7 +16,7 @@ class StreamEdit extends React.Component {
     }
 
     render() {
-        if(!this.props.stream) {
+        if(!this.props.stream) { // render시작되는 부분은 항상 조심. fetch Data이전에 초기 렌더 발생하므로.
             return <div>Loading....</div>;
         }
 
@@ -32,8 +33,9 @@ class StreamEdit extends React.Component {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    const id = ownProps.match.params.id;
-    return { stream: state.streams[id] };
+    return { stream: state.streams[ownProps.match.params.id] };
+    // streams state에 담겨있는 stream object를 꺼내와 StreamEdit Component에 공급해준다.
+    // 이 작업은 initial Value를 채워넣기위함이다.
 }
 
 export default connect(mapStateToProps, { fetchStream, editStream })(StreamEdit);

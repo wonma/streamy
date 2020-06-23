@@ -26,7 +26,7 @@ export const signOut = () => {
 export const createStream = (formValues) => {
     return async (dispatch, getState) => {
         const { userId } = getState().auth;
-        const response = await streams.post('/streams', { ...formValues, userId});
+        const response = await streams.post('/streams', { ...formValues, userId: userId});
 
         dispatch({
             type: CREATE_STREAM,
@@ -62,6 +62,7 @@ export const editStream = (id, formValues) => {
     };
 };
 
+
 export const deleteStream = (id) => {
     return async (dispatch) => {
         const response = await streams.delete(`/streams/${id}`);
@@ -70,6 +71,8 @@ export const deleteStream = (id) => {
             type: DELETE_STREAM,
             payload: id // reducer는 omit업뎃을 진행하기위해 id정보만 필요함
         });
+
+        history.push('/');
     };
 };
 
